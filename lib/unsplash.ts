@@ -1,6 +1,6 @@
 import { createApi } from 'unsplash-js';
 
-const unsplash = createApi({
+export const unSplash = createApi({
   accessKey: process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY!,
   fetch: fetch
 });
