@@ -1,14 +1,22 @@
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "cockroachdb"
-  url      = env("DATABASE_URL")
+    provider = "cockroachdb"
+    url      = env("DATABASE_URL")
 }
 
 model Board {
-  id String @id @default(uuid())
+    id              String @id @default(uuid())
+    orgId           String
+    title           String
+    imageId         String
+    imageThumbUrl   String @db.String
+    imageFullUrl    String @db.String
+    imageUserName   String @db.String
+    imageLinkHTML   String @db.String
 
-  title String
+    createdAt       DateTime @default(now())
+    updatedAt       DateTime @updatedAt
 }
