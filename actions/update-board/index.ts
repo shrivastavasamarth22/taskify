@@ -12,7 +12,6 @@ const handler = async (data: InputType): Promise<ReturnType> => {
 
     if (!userId || !orgId) return { error: "Unauthorized" };
 
-
     const { title, id } = data;  
     let board;
 
