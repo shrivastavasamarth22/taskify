@@ -31,4 +31,4 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     return { data: board };
 }
 
-export const updateBoard = createSafeAction(DeleteBoard, handler)
+export const deleteBoard = createSafeAction(DeleteBoard, handler)
