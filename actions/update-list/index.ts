@@ -32,7 +32,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
         return { error: "Failed to update" }
     }
 
-    revalidatePath(`/board/${id}`);
+    revalidatePath(`/board/${boardId}`);
 
     return { data: list };
 }
