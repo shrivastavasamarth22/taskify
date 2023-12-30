@@ -26,7 +26,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
         if (!board) return { error: "Board not found" }
 
         const lastList = await db.list.findFirst({
-            where: { boardId},
+            where: { boardId },
             orderBy: { order: "desc" },
             select: { order: true }
         })
