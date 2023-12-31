@@ -4,6 +4,8 @@ import { ElementRef, useRef } from "react";
 
 import { List } from "@prisma/client";
 
+import { toast } from "sonner";
+
 import { 
     Popover,
     PopoverTrigger,
@@ -17,7 +19,7 @@ import { Separator } from "@/components/ui/separator";
 
 import { useAction } from "@/hooks/use-action";
 import { deleteList } from "@/actions/delete-list";
-import { toast } from "sonner";
+import { copyList } from "@/actions/copy-list";
 
 interface ListOptionsProps {
     data: List
@@ -39,13 +41,30 @@ export const ListOptions = ({
         onError: (error) => {
             toast.error(error)
         }
-    }) 
+    })
+
+    const { execute: executeCopy } = useAction(copyList, {
+        onSuccess: (data) => {
+            toast.success(`List ${data.title} copied`)
+            closeRef.current?.click()
+        },
+        onError: (error) => {
+            toast.error(error)
+        }
+    })
 
     const onDelete = (formData: FormData) => {
         const id = formData.get('id') as string
         const boardId = formData.get('boardId') as string
 
         executeDelete({ id, boardId })
+    }
+
+    const onCopy = (formData: FormData) => {
+        const id = formData.get('id') as string
+        const boardId = formData.get('boardId') as string
+
+        executeCopy({ id, boardId })
     }
 
     return (
@@ -90,7 +109,9 @@ export const ListOptions = ({
                 >
                     Add card...
                 </Button>
-                <form>
+                <form
+                    action={onCopy}
+                >
                     <input 
                         hidden
                         name="id"
