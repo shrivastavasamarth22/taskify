@@ -51,6 +51,7 @@ export const FormTextarea = forwardRef<HTMLTextAreaElement, FormTextAreaProps>((
                 <Textarea 
                     ref={ref}
                     id={id}
+                    name={id}
                     placeholder={placeholder}
                     required={required}
                     disabled={pending || disabled}
